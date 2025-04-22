@@ -1,0 +1,190 @@
+HTML CODE
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>User Information Form</h1>
+    <form action="#" method="POST" id="userForm">
+        <div>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <script src="js/validation.js"></script>
+</body>
+</html>
+CSS CODE
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 0;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    width: 100%;
+    margin: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #3498db, #8e44ad);
+    border-radius: 2px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus {
+    border-color: #3498db;
+    outline: none;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+input[type="submit"] {
+    background: linear-gradient(135deg, #3498db, #8e44ad);
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+button[type="submit"] {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    padding: 15px 20px; /* Bigger padding for a larger button */
+    font-size: 18px; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    width: 100%; /* Full width button */
+}
+
+button[type="submit"]:hover {
+    background-color: #218838; /* Darker green on hover */
+JAVASCRIPT
+
+document.addEventListener('DOMContentLoaded', function () {
+    const userForm = document.getElementById('userForm');
+
+    
+    if (!userForm) {
+        console.error('Form with ID "userForm" not found!');
+        return;
+    }
+
+    userForm.addEventListener('submit', function (event) {
+        
+        event.preventDefault();
+
+        
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const dob = document.getElementById('dob').value;
+
+        
+        if (!fullName) {
+            alert('Full Name is required.');
+            return;
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert('Please enter a valid Email address.');
+            return;
+        }
+
+        if (!dob) {
+            alert('Date of Birth is required.');
+            return;
+        }
+
+        
+        const confirmMessage = `Please confirm your details:\n\nFull Name: ${fullName}\nEmail: ${email}\nDate of Birth: ${dob}\n\nAre these details correct?`;
+
+        
+        if (confirm(confirmMessage)) {
+            
+            userForm.submit();
+        }
+    });
+
+    
+    console.log('Form validation script loaded successfully');
+});
+
